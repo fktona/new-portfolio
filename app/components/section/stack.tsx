@@ -158,7 +158,9 @@ const TechGrid = React.memo(
             className="flex flex-col items-center gap-2"
           >
             <Image alt={item.name} width={40} height={40} src={item.icon} />
-            <span className="text-sm">{item.name}</span>
+            <span className="text-sm text-center whitespace-nowrap">
+              {item.name}
+            </span>
           </motion.li>
         ))}
       </motion.ul>
