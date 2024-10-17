@@ -66,7 +66,7 @@ export const projects = [
     techStack: ["React.js", "Mongodb", "Tailwind CSS", "Node.js"],
     image: "/project/vorta.png",
     github: "",
-    live: "#",
+    live: "",
     status: "not completed",
     collectionsImg: [
       {

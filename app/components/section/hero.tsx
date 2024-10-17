@@ -36,14 +36,14 @@ export default function Hero() {
           duration: 0.4,
         }}
         onClick={() => setShowContacts(true)}
-        className=" md:hidden w-[200px] fixed bottom-5 aspect-square right-0 active:scale-95 transition-all duration-150 lg:top-[calc(100%-40px)] z-50  rounded-full   after:top-[10%] after:left-[10%] "
+        className=" md:hidden w-[80px] fixed bottom-14 aspect-square right-0 active:scale-95 transition-all duration-150 lg:top-[calc(100%-40px)] z-50  rounded-full   "
       >
         <CircularText
           text="REACH OUT. REACH OUT. REACH OUT. "
           textColor="white"
           radius={80}
           iconSize={54}
-          className="absolute  right-5"
+          className="absolute  right-5 w-full h-full"
           icon={<Mail size={54} fill="white" stroke="#5700ef" />}
         />
       </motion.button>

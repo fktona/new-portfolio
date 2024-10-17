@@ -64,12 +64,18 @@ export default function SlidingDrawer({
             <div className="p-6 h-full flex flex-col">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">{title}</h2>
-                <Link href={live || ""} target="_blank">
-                  <button className="p-1 rounded-md bg-primaryBlue active:scale-90">
-                    <SquareArrowOutUpRight size={26} />
-                    <span className="sr-only">Close</span>
-                  </button>
-                </Link>
+                {live !== "" ? (
+                  <Link href={live || ""} target="_blank">
+                    <button className="p-1 rounded-md bg-primaryBlue active:scale-90">
+                      <SquareArrowOutUpRight size={26} />
+                      <span className="sr-only">Close</span>
+                    </button>
+                  </Link>
+                ) : (
+                  <span className="bg-white/30 px-3 py-1 rounded-2xl">
+                    In Progress
+                  </span>
+                )}
               </div>
 
               <div className="flex-grow overflow-y-auto">{children}</div>
