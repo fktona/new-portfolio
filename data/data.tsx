@@ -1,3 +1,5 @@
+import { section } from "framer-motion/client";
+
 export const projects = [
   {
     name: "Pixel Thumbs",
@@ -8,6 +10,21 @@ export const projects = [
     github: "",
     live: "https://www.pixelthumbs.xyz",
     status: "completed",
+    collectionsImg: [
+      {
+        section: "home",
+        img: "1",
+      },
+      {
+        section: "puzzle game",
+        img: "2",
+      },
+      {
+        section: "customize thumbs",
+        img: "3",
+      },
+    ],
+    collectionName: "pt",
   },
   {
     name: "Xpireminder",
@@ -18,6 +35,29 @@ export const projects = [
     github: "",
     live: "https://expireminder.netlify.app",
     status: "completed",
+    collectionsImg: [
+      {
+        section: "login",
+        img: "1",
+      },
+      {
+        section: "dashboard",
+        img: "2",
+      },
+      {
+        section: "add product",
+        img: "3",
+      },
+      {
+        section: "notification",
+        img: "4",
+      },
+      {
+        section: "email notification",
+        img: "5",
+      },
+    ],
+    collectionName: "ex",
   },
   {
     name: "Vorta AI",
@@ -26,8 +66,27 @@ export const projects = [
     techStack: ["React.js", "Mongodb", "Tailwind CSS", "Node.js"],
     image: "/project/vorta.png",
     github: "",
-    live: "https://vorta-ai.netlify.app",
+    live: "#",
     status: "not completed",
+    collectionsImg: [
+      {
+        section: "landing page",
+        img: "1",
+      },
+      {
+        section: "login",
+        img: "2",
+      },
+      {
+        section: "dashboard",
+        img: "3",
+      },
+      {
+        section: "chatbot",
+        img: "4",
+      },
+    ],
+    collectionName: "va",
   },
   {
     name: "SeiChats",
@@ -37,6 +96,17 @@ export const projects = [
     github: "",
     live: "https://seichats.com",
     status: "pending",
+    collectionsImg: [
+      {
+        section: "home",
+        img: "1",
+      },
+      {
+        section: "home",
+        img: "2",
+      },
+    ],
+    collectionName: "sc",
   },
   {
     name: "Culinary Oasis",
@@ -47,6 +117,37 @@ export const projects = [
     github: "",
     live: "https://culinary-oasis.netlify.app",
     status: "completed",
+    collectionsImg: [
+      {
+        section: "login",
+        img: "1",
+      },
+      {
+        section: "Home",
+        img: "2",
+      },
+      {
+        section: "Order",
+        img: "3",
+      },
+      {
+        section: "order",
+        img: "4",
+      },
+      {
+        section: "checkout",
+        img: "5",
+      },
+      {
+        section: "order history",
+        img: "6",
+      },
+      {
+        section: "reservation",
+        img: "7",
+      },
+    ],
+    collectionName: "co",
   },
   {
     name: "Flippin Labs",
@@ -54,7 +155,42 @@ export const projects = [
     techStack: ["Nextjs", "Tailwind CSS"],
     image: "/project/flippin.png",
     github: "",
-    live: "https://flippin.com",
+    live: "https://flippinlabs.com",
     status: "completed",
+    collectionsImg: [
+      {
+        section: "home",
+        img: "1",
+      },
+      {
+        section: "collections",
+        img: "2",
+      },
+      {
+        section: "Members",
+        img: "3",
+      },
+    ],
+    collectionName: "fl",
   },
+  // {
+  //   name: "Help Me Out",
+  //   description:
+  //     "A Chrome Extension that allows users to screen record  and share with friends or save to their device",
+  //   techStack: ["HTML", "CSS", "Javascript", "Node.js"],
+  //   image: "/project/helpmeout.png",
+  //   github: "",
+  //   live: "#",
+  //   status: "completed",
+  //   collectionsImg: [
+  //     {
+  //       section: "Help Me Out",
+  //       img: "1",
+  //     },
+  //     {
+  //       section: "record",
+  //       img: "2",
+  //     },
+  //   ],
+  // },
 ];

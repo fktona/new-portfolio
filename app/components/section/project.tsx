@@ -13,6 +13,7 @@ import { projects } from "@/data/data";
 import SlidingDrawer from "../sliding-drawer";
 import Accordion from "../ui/Accordion";
 import { useScroll } from "../../context/menuContext";
+import ImageSlider from "../ui/slider";
 export default function Project() {
   const { projectRef } = useScroll() as any;
   const [switchText, setSwitchText] = useState("");
@@ -21,6 +22,10 @@ export default function Project() {
     image: string;
     description: string;
     techStack: string[];
+    live: string;
+    status: string;
+    collectionsImg: { section: string; img: string }[];
+    collectionName: string;
   } | null>(null);
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, {
@@ -84,7 +89,7 @@ export default function Project() {
         ref={containerRef}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 place-items-center place-content-center"
       >
-        {projects.map((project, index) => {
+        {projects.map((project) => {
           return (
             <motion.div
               key={project.name}
@@ -139,16 +144,22 @@ export default function Project() {
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}
         title={selectedProject?.name || "Project Details"}
+        live={selectedProject?.live}
         width="w-full sm:w-96"
       >
         {selectedProject && (
           <div className="space-y-6 sm:space-y-8">
-            <BlurImage
+            {/* <BlurImage
               src={selectedProject.image}
               alt={selectedProject.name}
               width={400}
               height={225}
               className="w-full rounded-lg"
+            /> */}
+
+            <ImageSlider
+              collectionsImg={selectedProject.collectionsImg}
+              collectionName={selectedProject.collectionName}
             />
 
             <Accordion title="Description">
@@ -172,6 +183,12 @@ export default function Project() {
             </div>
           </div>
         )}
+        <motion.button
+          onClick={() => setSelectedProject(null)}
+          className="min-h-[50px] absolute  enteryButton w-[80px] md:hidden active:scale-90 isolate z-10 overflow-hidden  md:w-[180px] group  bottom-20 rounded-sm border-2 uppercase"
+        >
+          Close
+        </motion.button>
       </SlidingDrawer>
     </motion.div>
   );

@@ -77,10 +77,11 @@ export default function Nav({ className }: { className?: string }) {
               exit={{ height: 0, width: "150px", opacity: 0 }}
               transition={{ duration: 0.6 }}
               className={cn(
-                "absolute top-full right-0 isolate mt-2 overflow-hidden flex bg-white/5  z-10 flex-col  p-4"
+                "absolute top-full right-0 isolate mt-2 overflow-hidden flex  z-10 flex-col  p-4"
               )}
             >
               <div className="absolute w-full -z-10 h-full bg-black" />
+              <div className="absolute w-full -z-[5] h-full bg-white/5" />
               {menuItems.map((item, index) => (
                 <motion.li
                   key={item.item}

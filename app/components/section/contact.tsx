@@ -1,16 +1,9 @@
 "use client";
 import { submitForm } from "@/actions/formSubmission";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  ChevronDown,
-  CloudDownload,
-  Github,
-  Linkedin,
-  Phone,
-} from "lucide-react";
+import { ChevronDown, CloudDownload, Github, Linkedin } from "lucide-react";
 import Image from "next/image";
 import { scaleVariants } from "../../libs/animation";
-import Link from "next/link";
 import { useLandingCtx } from "../../context/landingCtx";
 import { useFormState, useFormStatus } from "react-dom";
 import { useState } from "react";
@@ -30,11 +23,10 @@ const formSchema = z.object({
   message: z.string().min(1, { message: "Message is required" }),
 });
 const initialState = {
-  name: "",
-  email: "",
+  errors: {},
   message: "",
-  success: false,
 };
+
 function SubmitButton() {
   const { pending } = useFormStatus();
 
@@ -42,7 +34,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="min-h-[40px] sm:min-h-[50px] min-w-[90px] w-full sm:w-[180px] group relative rounded-sm border-2 uppercase bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
+      className="min-h-[40px] bgg sm:min-h-[50px] min-w-[90px] w-full sm:w-[180px] group relative rounded-sm border-2 uppercase bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
     >
       <p className="transform relative w-fit mx-auto transition-all duration-200 text-sm sm:text-base">
         {pending ? "SUBMITTING..." : "SUBMIT"}
@@ -53,38 +45,6 @@ function SubmitButton() {
 export default function Contact() {
   const { setShowContacts, showContacts } = useLandingCtx();
   const [state, formAction] = useFormState(submitForm, initialState);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>(
-    {}
-  );
-
-  const validateForm = (formData: FormData) => {
-    try {
-      formSchema.parse(formData);
-      setErrors({});
-      return true;
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const newErrors: Partial<Record<keyof FormData, string>> = {};
-        error.errors.forEach((err) => {
-          if (err.path[0]) {
-            newErrors[err.path[0] as keyof FormData] = err.message;
-          }
-        });
-        setErrors(newErrors);
-      }
-      return false;
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries()) as unknown as FormData;
-    if (validateForm(data)) {
-      formAction(formData);
-    }
-  };
-
   return (
     <AnimatePresence>
       {showContacts && (
@@ -178,11 +138,15 @@ export default function Contact() {
                     Email: adetona.fk@gmail.com
                   </p>
                 </a>
-
-                <button className="flex items-center justify-center gap-2 hover:opacity-100 opacity-70 cursor-pointer active:scale-95 text-sm sm:text-base">
-                  <CloudDownload size={16} />
-                  <span>Resume</span>
-                </button>
+                <a
+                  href="https://drive.google.com/file/d/11bWk0zYM7gF-0-UslM8sbYwMWgFczU6w/view?usp=sharing"
+                  target="_blank"
+                >
+                  <button className="flex items-center justify-center gap-2 hover:opacity-100 opacity-70 cursor-pointer active:scale-95 text-sm sm:text-base">
+                    <CloudDownload size={16} />
+                    <span>Resume</span>
+                  </button>
+                </a>
               </div>
             </div>
 
@@ -190,7 +154,7 @@ export default function Contact() {
               <h2 className="text-2xl sm:text-3xl mb-6 sm:mb-8 font-light uppercase">
                 Enquiries
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <form action={formAction} className="space-y-4 sm:space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 border-gray-800 border-b">
                   <label
                     htmlFor="name"
@@ -207,8 +171,10 @@ export default function Contact() {
                       placeholder="Your name"
                       className="bg-transparent w-full outline-none border-none rounded-none px-0 py-2 text-white placeholder-gray-700 focus:ring-0 focus:border-gray-500 text-sm sm:text-base"
                     />
-                    {errors.name && (
-                      <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+                    {state.errors?.name && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {state.errors.name}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -227,9 +193,9 @@ export default function Contact() {
                       placeholder="E.g. example@exp.com"
                       className="bg-transparent w-full outline-none border-none rounded-none px-0 py-2 text-white placeholder-gray-700 focus:ring-0 focus:border-gray-500 text-sm sm:text-base"
                     />
-                    {errors.email && (
+                    {state.errors?.email && (
                       <p className="text-red-500 text-xs mt-1">
-                        {errors.email}
+                        {state.errors.email}
                       </p>
                     )}
                   </div>
@@ -241,12 +207,14 @@ export default function Contact() {
                     placeholder="Your message*"
                     className="bg-transparent w-full outline-none border-none rounded-none px-0 py-2 text-white placeholder-gray-700 resize-none min-h-[100px] focus:ring-0 focus:border-gray-500 text-sm sm:text-base"
                   />
-                  {errors.message && (
-                    <p className="text-red-500 text-xs">{errors.message}</p>
+                  {state.errors?.message && (
+                    <p className="text-red-500 text-xs">
+                      {state.errors.message}
+                    </p>
                   )}
                 </div>
                 <SubmitButton />
-                {state?.message && (
+                {state.message && (
                   <p
                     className={`text-sm ${
                       state.success ? "text-green-500" : "text-red-500"

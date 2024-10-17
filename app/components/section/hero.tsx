@@ -13,6 +13,7 @@ import {
 import CircularText from "../ui/circlulartext";
 import { useLandingCtx } from "../../context/landingCtx";
 import { useScroll } from "../../context/menuContext";
+import Socials from "../ui/Socials";
 
 export default function Hero() {
   const { homeRef } = useScroll() as any;
@@ -115,7 +116,7 @@ export default function Hero() {
             <span className="uppercase text-[30px]">experience</span>
           </li>
         </motion.ul>
-        <div className="flex lg:justify-end -space-x-3  justify-center opacity-85   items-end">
+        {/* <div className="flex lg:justify-end -space-x-3  justify-center opacity-85   items-end">
           <a href={"https://github.com/fktona"} target="_blank">
             <motion.button
               variants={scaleVariants}
@@ -140,7 +141,8 @@ export default function Hero() {
               <Mail />
             </motion.button>
           </a>
-        </div>
+        </div> */}
+        <Socials />
       </motion.div>
     </motion.div>
   );

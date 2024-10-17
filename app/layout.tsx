@@ -18,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="shortcut icon" href="/logo.png" type="image/x-icon" />
       <body
         className={`${ppArsenal.variable}   antialiased max-w-screen-2xl mx-auto   relative`}
       >

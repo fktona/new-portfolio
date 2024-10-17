@@ -3,11 +3,13 @@
 import React, { ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SquareArrowOutUpRight, X } from "lucide-react";
+import Link from "next/link";
 
 interface SlidingDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  live?: string;
   children: ReactNode;
   position?: "left" | "right";
   width?: string;
@@ -16,6 +18,7 @@ interface SlidingDrawerProps {
 export default function SlidingDrawer({
   isOpen,
   onClose,
+  live,
   title = "Drawer",
   children,
   position = "right",
@@ -61,13 +64,12 @@ export default function SlidingDrawer({
             <div className="p-6 h-full flex flex-col">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">{title}</h2>
-                <button
-                  onClick={onClose}
-                  className="p-1 rounded-md bg-primaryBlue active:scale-90"
-                >
-                  <SquareArrowOutUpRight size={26} />
-                  <span className="sr-only">Close</span>
-                </button>
+                <Link href={live || ""} target="_blank">
+                  <button className="p-1 rounded-md bg-primaryBlue active:scale-90">
+                    <SquareArrowOutUpRight size={26} />
+                    <span className="sr-only">Close</span>
+                  </button>
+                </Link>
               </div>
 
               <div className="flex-grow overflow-y-auto">{children}</div>

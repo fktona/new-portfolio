@@ -3,17 +3,13 @@ import Logo from "../logo";
 import { AnimatedText, textyVariants } from "../../libs/animation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLandingCtx } from "../../context/landingCtx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function EntryPage() {
   const { setShowChildren, isPlaying, setIsPlaying } = useLandingCtx();
-  useEffect(() => {
-    const tt = setTimeout(() => {
-      isPlaying && setShowChildren(true);
-    }, 1000);
-    return () => clearTimeout(tt);
-  }, [isPlaying]);
+  const [closeEntery, setCloseEntery] = useState(false);
   const showChildren = () => {
+    setCloseEntery(true);
     setTimeout(() => {
       setShowChildren(true);
     }, 1000);
@@ -61,66 +57,70 @@ export default function EntryPage() {
             initial="hidden"
             animate="visible"
           >
-            <Logo className="md:w-12 w-10" />
+            <Logo className="w-12 " />
           </motion.div>
-          <div className="text-center md:text-2xl text-md uppercase text-white">
+          <div className="text-center text-2xl text-md uppercase text-white">
             <AnimatedText text="Faith's Portfolio" delay={1} />
           </div>
         </motion.div>
       </div>
       <div className="overflow-hidden uppercase">
         <AnimatePresence>
-          <div className="overflow-hidden text-center w-full">
-            <motion.p
-              initial={{ y: 60 }}
-              animate={{ y: 0 }}
-              transition={{
-                type: "tween",
-                stiffness: 200,
-                damping: 10,
-                duration: 1,
-                delay: 3.4,
-              }}
-              exit={{ y: -60 }}
-            >
-              Would you like to enable audio playback?
-            </motion.p>
-          </div>
-        </AnimatePresence>
-        <AnimatePresence>
-          {!isPlaying && (
-            <div className="flex items-center gap-4 justify-center overflow-hidden">
-              <motion.button
-                onClick={() => setIsPlaying(true)}
-                initial={{ y: 200 }}
-                animate={{ y: 0 }}
-                transition={{
-                  stiffness: 200,
-                  damping: 10,
-                  duration: 1,
-                  delay: 3.4,
-                }}
-                exit={{ y: 80 }}
-                className="min-h-[50px]  my-6 bgg w-[130px]  md:w-[180px] group  relative rounded-sm border-2 uppercase"
-              >
-                Abosuletly!
-              </motion.button>
-              <motion.button
-                onClick={showChildren}
-                initial={{ y: 200 }}
-                animate={{ y: 0 }}
-                transition={{
-                  stiffness: 200,
-                  damping: 10,
-                  duration: 1,
-                  delay: 3.4,
-                }}
-                exit={{ y: 80 }}
-                className="min-h-[50px] bgg w-[130px]  md:w-[180px] group  relative rounded-sm border-2 uppercase"
-              >
-                Not Now
-              </motion.button>
-            </div>
+          {!closeEntery && (
+            <>
+              <div className="overflow-hidden text-center w-full">
+                <motion.p
+                  initial={{ y: 60 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    type: "tween",
+                    stiffness: 200,
+                    damping: 10,
+                    duration: 1,
+                    delay: 3.4,
+                  }}
+                  exit={{ y: -80, transition: { duration: 1, delay: 0 } }}
+                >
+                  Would you like to enable audio playback?
+                </motion.p>
+              </div>
+
+              <div className="flex items-center gap-4 justify-center overflow-hidden">
+                <motion.button
+                  onClick={() => {
+                    setIsPlaying(true);
+                    showChildren();
+                  }}
+                  initial={{ y: 200 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    stiffness: 200,
+                    damping: 10,
+                    duration: 1,
+                    delay: 3.4,
+                  }}
+                  exit={{ y: 80, transition: { duration: 1, delay: 0 } }}
+                  className="min-h-[50px] enteryButton overflow-hidden  my-6 isolate w-[130px]  md:w-[180px] group  relative rounded-sm border-2 uppercase"
+                >
+                  Abosuletly!
+                </motion.button>
+                <motion.button
+                  onClick={showChildren}
+                  initial={{ y: 200 }}
+                  animate={{ y: 0 }}
+                  transition={{
+                    stiffness: 200,
+                    damping: 10,
+                    duration: 1,
+                    delay: 3.4,
+                  }}
+                  exit={{ y: 80, transition: { duration: 1, delay: 0 } }}
+                  className="min-h-[50px] enteryButton w-[130px] isolate z-10 overflow-hidden  md:w-[180px] group  relative rounded-sm border-2 uppercase"
+                >
+                  Not Now
+                </motion.button>
+              </div>
+            </>
           )}
         </AnimatePresence>
       </div>
