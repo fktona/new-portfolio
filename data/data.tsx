@@ -31,7 +31,7 @@ export const projects = [
     description:
       "A Web Application that allows users to keep track of their product expiration dates and get notified before they expire",
     techStack: ["React.js", "Firebase", "Tailwind CSS", "Node.js"],
-    image: "/project/Expireminder.png",
+    image: "/project/expireminder.png",
     github: "",
     live: "https://expireminder.netlify.app",
     status: "completed",

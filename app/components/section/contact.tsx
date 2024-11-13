@@ -6,8 +6,9 @@ import Image from "next/image";
 import { scaleVariants } from "../../libs/animation";
 import { useLandingCtx } from "../../context/landingCtx";
 import { useFormState, useFormStatus } from "react-dom";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { z } from "zod";
+import { useEffect } from "react";
 type FormData = {
   name: string;
   email: string;
@@ -45,6 +46,12 @@ function SubmitButton() {
 export default function Contact() {
   const { setShowContacts, showContacts } = useLandingCtx();
   const [state, formAction] = useFormState(submitForm, initialState);
+  const isContact = useSearchParams().get("contact") === "true";
+  useEffect(() => {
+    if (isContact) {
+      setShowContacts(true);
+    }
+  }, [isContact]);
   return (
     <AnimatePresence>
       {showContacts && (
@@ -139,7 +146,7 @@ export default function Contact() {
                   </p>
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/11bWk0zYM7gF-0-UslM8sbYwMWgFczU6w/view?usp=sharing"
+                  href="https://drive.google.com/drive/u/0/folders/1CMaPq6eE95RVz4kB5xbWW3WgOeET04Yd"
                   target="_blank"
                 >
                   <button className="flex items-center justify-center gap-2 hover:opacity-100 opacity-70 cursor-pointer active:scale-95 text-sm sm:text-base">
