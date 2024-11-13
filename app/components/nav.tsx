@@ -116,7 +116,7 @@ export default function Nav({ className }: { className?: string }) {
               ))}
               <hr className="mt-3 border border-gray-700" />
               <a
-                href="https://drive.google.com/file/d/11bWk0zYM7gF-0-UslM8sbYwMWgFczU6w/view?usp=sharing"
+                href="https://drive.google.com/drive/u/0/folders/1CMaPq6eE95RVz4kB5xbWW3WgOeET04Yd"
                 target="_blank"
               >
                 <motion.button
