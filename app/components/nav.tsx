@@ -6,10 +6,13 @@ import Logo from "./logo";
 import { cn } from "../libs/utils";
 import MiniAudioPlayer from "./ui/audioControl";
 import { useScroll } from "../context/menuContext";
+import { useLandingCtx } from "../context/landingCtx";
+import { i } from "framer-motion/client";
 
 export default function Nav({ className }: { className?: string }) {
   const [isHovered, setIsHovered] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const { setShowContacts, showContacts } = useLandingCtx();
   //
   const { homeRef, aboutRef, projectRef, contactRef, scrollToSection } =
     useScroll() as any;
@@ -88,6 +91,8 @@ export default function Nav({ className }: { className?: string }) {
                   onClick={() => {
                     setHoveredItem(null);
                     scrollToSection(item.ref);
+                    item.item === "Contact" && setShowContacts(!showContacts);
+                    item.item !== "Contact" && setShowContacts(false);
                   }}
                   className={cn(
                     "flex items-center ml-3 min-h-[30px] uppercase  cursor-pointer",
