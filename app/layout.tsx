@@ -8,8 +8,7 @@ import Nav from "./components/nav";
 import ScrollProvider from "./context/menuContext";
 export const metadata: Metadata = {
   title: "Faith's Portfolio",
-  description:
-    "Portfolio of a software engineer , software developer , frontend developer , backend developer , fullstack developer , web developer , mobile developer , mobile app developer , software architect , software designer",
+  description: "Software Developer Portfolio",
 };
 
 export default function RootLayout({
